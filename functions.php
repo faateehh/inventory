@@ -193,5 +193,26 @@ function hapus_stok_keluar($id) {
   return mysqli_affected_rows($conn);
 }
 
-// pelaporan
+// tambah data laporan
+function tambah_laporan($data) {
+  global $conn;
+
+  $id_stok_keluar = htmlspecialchars($data['id_stok_keluar']);
+  $jumlah = htmlspecialchars($data['jumlah']);
+  $keterangan = htmlspecialchars($data['keterangan']);
+
+  $query = mysqli_query($conn, "INSERT INTO laporan ( id_stok_keluar, jumlah, keterangan ) VALUES ( '$id_stok_keluar', '$jumlah', '$keterangan' )");
+
+  return mysqli_affected_rows($conn);
+}
+
+// ubah data laporan
+
+// hapus data laporan
+function hapus_laporan($id) {
+  global $conn;
+  $query = mysqli_query($conn, "DELETE FROM laporan WHERE id=$id");
+
+  return mysqli_affected_rows($conn);
+}
 ?>

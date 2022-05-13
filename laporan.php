@@ -25,7 +25,7 @@
       <div class="card-header">
           <div class="d-sm-flex align-items-center justify-content-between">
               <h4 class="m-0 font-weight-bold">Data Laporan</h4>
-              <a href="#tambah-laporan.php" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
+              <a href="tambah-laporan.php" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
                   Tambah
               </a>
           </div>
@@ -34,7 +34,36 @@
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered display" id="example" width="100%" cellspacing="0">
-          
+          <thead>
+              <tr>
+                  <th scope="col">No.</th>
+                  <th scope="col">ID Stok Keluar</th>
+                  <th scope="col">Nama Bahan Baku</th>
+                  <th scope="col">Jumlah</th>
+                  <th scope="col">Keterangan</th>
+                  <th scope="col">Aksi</th>
+              </tr>
+          </thead>
+          <tbody>
+              <?php 
+              $dataLaporan = mysqli_query($conn, "SELECT stok_keluar.id as `id_stok_keluar`, stok_keluar.nama, laporan.id, laporan.jumlah, laporan.keterangan FROM laporan JOIN stok_keluar ON laporan.id_stok_keluar = stok_keluar.id");
+              
+              $i = 1;
+              foreach( $dataLaporan as $row ) :
+              ?>
+              <tr>
+                  <td scope="row"><?= $i++; ?></td>
+                  <td scope="row"><?= $row["id_stok_keluar"]; ?></td>
+                  <td scope="row"><?= $row["nama"]; ?></td>
+                  <td scope="row"><?= $row["jumlah"]; ?></td>
+                  <td scope="row"><?= $row["keterangan"]; ?></td>
+                  <td scope="row">
+                      <a type="button" href="#ubah-laporan.php?id=<?= $row["id"]; ?>" class="btn btn-primary" >Ubah</a>
+                      <a type="button" href="hapus-laporan.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin?');" class="btn btn-danger">Hapus</a>
+                  </td>
+              </tr>
+              <?php endforeach; ?>
+          </tbody>
           </table>
         </div>
       </div>

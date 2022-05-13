@@ -32,19 +32,19 @@
             <div class="card card-body">
                 <div class="table-responsive">
 
-                    <h4 class="fw-10">Selamat Datang Kembali, Dian!</h4>
+                    <h4 class="fw-10">Selamat Datang Kembali, <?= $_SESSION['nama_pengguna']; ?>!</h4>
 
 
                     <h6 >INFO AKUN DETAIL</h6>
 
                     <div class="card card-body" >
-                        <p>Nama Lengkap<br> Dian Sri Rizky</p>
+                        <p>Nama Lengkap<br> <?= $_SESSION['nama_lengkap']; ?></p>
                     </div>
                     <div class="card card-body" >
-                        <p>Nama Pengguna<br> dianrizky</p>
+                        <p>Nama Pengguna<br> <?= $_SESSION['nama_pengguna']; ?></p>
                     </div>
                     <div class="card card-body" >
-                        <p>Hak Akses<br> Admin</p>
+                        <p>Hak Akses<br> <?= $_SESSION['role']; ?></p>
                     </div>
 
                 </div>

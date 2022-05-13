@@ -37,6 +37,7 @@
           <thead>
               <tr>
                   <th scope="col">No.</th>
+                  <th scope="col">ID Stok Keluar</th>
                   <th scope="col">Nama Bahan Baku</th>
                   <th scope="col">Satuan</th>
                   <th scope="col">Tanggal</th>
@@ -52,11 +53,13 @@
               ?>
               <tr>
                   <td scope="row"><?= $i++; ?></td>
+                  <td scope="row"><?= $row["id"]; ?></td>
                   <td scope="row"><?= $row["nama"]; ?></td>
                   <td scope="row"><?= $row["satuan"]; ?></td>
                   <td scope="row"><?= $row["tanggal"]; ?></td>
                   <td scope="row"><?= $row["jumlah"]; ?></td>
                   <td scope="row">
+                      <a type="button" href="detail-stok-keluar.php?id=<?= $row["id"]; ?>" class="btn btn-warning">Detail</a>
                       <a type="button" href="#ubah-stok-keluar.php?id=<?= $row["id"]; ?>" class="btn btn-primary" >Ubah</a>
                       <a type="button" href="hapus-stok-keluar.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin?');" class="btn btn-danger">Hapus</a>
                   </td>

@@ -19,11 +19,11 @@
     include 'navbar-sidebar.php'; 
     
     if(ISSET($_POST['tambah'])) {
-      if(tambah_stok_keluar($_POST) > 0 ) {
+      if(tambah_laporan($_POST) > 0 ) {
           echo "
           <script>
               alert('data berhasil ditambah!');
-              window.open('stok-keluar.php','_self')
+              window.open('laporan.php','_self')
           </script>";
       }
         
@@ -36,7 +36,7 @@
     <div class="card shadow mb-4">
       <div class="card-header">
           <div class="d-sm-flex align-items-center justify-content-between">
-              <h4 class="m-0 font-weight-bold">Stok Keluar / Tambah</h4>
+              <h4 class="m-0 font-weight-bold">Laporan / Tambah</h4>
           </div>
       </div>
 
@@ -45,29 +45,25 @@
         <form action="" method="post" class="py-3 px-3">
 
           <div class="mb-3">
-            <label for="nama" class="form-label">Nama Bahan Baku</label>
-            <select name="nama" id="nama" class="form-control">
+            <label for="id_stok_keluar" class="form-label">Stok Keluar</label>
+            <select name="id_stok_keluar" id="id_stok_keluar" class="form-control">
               <?php 
-              $dataBahanBaku = mysqli_query($conn, "SELECT * FROM bahan_baku");
+              $dataStokKeluar = mysqli_query($conn, "SELECT * FROM stok_keluar");
 
-              foreach( $dataBahanBaku as $row ) : 
+              foreach( $dataStokKeluar as $row ) : 
               ?>
-              <option value="<?= $row['nama']; ?>"><?= $row['nama']; ?></option>
+              <option value="<?= $row['id']; ?>">ID : <?= $row['id']; ?> | Nama Bahan Baku : <?= $row['nama']; ?> | Tanggal : <?= $row['tanggal']; ?></option>
               <?php endforeach; ?>
             </select>
-            <!-- <input type="text" class="form-control" id="nama" name="nama" required> -->
           </div>
-          <div class="mb-3">
-            <label for="satuan" class="form-label">Satuan</label>
-            <input type="text" class="form-control" id="satuan" name="satuan" required>
-          </div>
-          <div class="mb-3">
-            <label for="tanggal" class="form-label">Tanggal</label>
-            <input type="date" class="form-control" id="tanggal" name="tanggal" required>
-          </div>
+
           <div class="mb-3">
             <label for="jumlah" class="form-label">Jumlah</label>
             <input type="number" class="form-control" id="jumlah" name="jumlah" required>
+          </div>
+          <div class="mb-3">
+            <label for="keterangan" class="form-label">Keterangan</label>
+            <input type="text" class="form-control" id="keterangan" name="keterangan" required>
           </div>
           <div class="mb-3">
             <button type="submit" class="btn btn-success" name="tambah">Tambah</button>

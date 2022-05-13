@@ -40,12 +40,9 @@
         
     <div class="card shadow mb-4">
       <div class="card-header">
-          <div class="d-sm-flex align-items-center justify-content-between">
-              <h4 class="m-0 font-weight-bold">Data Bahan Baku</h4>
-              <a href="tambah-bahan-baku.php" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
-                  Tambah
-              </a>
-          </div>
+        <div class="col-3">
+          <a href="users.php" type="button" class="btn btn-outline-primary rounded-pill"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+        </div>
       </div>
 
       <div class="card-body">

@@ -13,10 +13,12 @@ if(ISSET($_POST['masuk'])) {
 
   if ($query->num_rows > 0) {
       $row = mysqli_fetch_assoc($query);
+      $_SESSION['id'] = $row['id'];
       $_SESSION['email'] = $row['email'];
       $_SESSION['role'] = $row['role'];
       $_SESSION['nama_lengkap'] = $row['nama_lengkap'];
       $_SESSION['nama_pengguna'] = $row['nama_pengguna'];
+      $_SESSION['gambar'] = $row['gambar'];
       header("Location: dashboard.php");
   } else {
       echo "<script>alert('Email atau password Anda salah. Silahkan coba lagi!')</script>";

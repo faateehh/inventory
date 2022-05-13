@@ -215,4 +215,60 @@ function hapus_laporan($id) {
 
   return mysqli_affected_rows($conn);
 }
+
+// pengaturan
+function pengaturan($data) {
+  global $conn;
+
+  $id = $data['id'];
+  $nama_lengkap = htmlspecialchars($data['nama_lengkap']);
+  $email = htmlspecialchars($data['email']);
+  $gambar = upload_gambar();
+  if( !$gambar ) {
+    return false;
+  }
+  
+  $query = mysqli_query($conn, "UPDATE users SET gambar = '$gambar', nama_lengkap = '$nama_lengkap', email = '$email' WHERE id = $id");
+
+  return mysqli_affected_rows($conn);
+}
+
+// upload gambar
+function upload_gambar() {
+  $namaFile = $_FILES['gambar']['name'];
+  $ukuranFile = $_FILES['gambar']['size'];
+  $tmpName = $_FILES['gambar']['tmp_name'];
+  $error = $_FILES['gambar']['error'];
+
+  if( $error == 4 ) {
+    echo 'pilih gambar terlebih dahulu!';
+
+    return false;
+  }
+  
+  $ekstensiValid = ['jpg', 'jpeg', 'png'];
+  $ekstensi = explode('.', $namaFile);
+  $ekstensi = strtolower(end($ekstensi));
+  // die;
+  if( !in_array($ekstensi, $ekstensiValid) ) {
+    echo 'tolong upload gambar!';
+
+    return false;
+  }
+
+  if( $ukuranFile > 1000000 ) {
+    echo 'ukuran terlalu besar!';
+
+    return false;
+  }
+
+  $namaFileBaru = uniqid();
+  $namaFileBaru .= '.';
+  $namaFileBaru .= $ekstensi;
+
+  move_uploaded_file($tmpName, 'src/images/' . $namaFileBaru);
+
+  return $namaFileBaru;
+}
+
 ?>

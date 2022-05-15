@@ -4,12 +4,6 @@ $conn = mysqli_connect("localhost", "root", "", "inventory");
 
 session_start();
 
-// if(ISSET($_SESSION['login'])){
-
-// } else {
-//   header('location: login.php');
-// }
-
 // menambah data bahan baku
 function tambah_bahan_baku($data) {
   global $conn;
@@ -115,6 +109,37 @@ function tambah_stok_masuk($data) {
 }
 
 // mengubah data stok masuk
+function ubah_stok_masuk($data) {
+  global $conn;
+
+  $id = $data['id'];
+  $jumlah = htmlspecialchars($data['jumlah']);
+
+  $query2 = mysqli_query($conn, "SELECT bahan_baku.stok, bahan_baku.nama, stok_masuk.nama, stok_masuk.id = $id, stok_masuk.jumlah FROM bahan_baku INNER JOIN stok_masuk ON bahan_baku.nama = stok_masuk.nama WHERE stok_masuk.id = $id ");
+  $row2 = mysqli_fetch_array($query2);
+  
+  $jumlah2 = $row2['jumlah'];
+  $nama = $row2['nama'];
+  $stok = $row2['stok'];
+  
+  if ( $jumlah > $jumlah2 ) {
+    $selisih = $jumlah - $jumlah2;
+    $tambahStok = $stok + $selisih;
+    
+    $query4 = mysqli_query($conn, "UPDATE bahan_baku SET stok = $tambahStok WHERE nama = '$nama' ");
+  } elseif ( $jumlah < $jumlah2 ) {
+    $selisih = $jumlah2 - $jumlah;
+    $kurangStok = $stok - $selisih;
+    
+    $query5 = mysqli_query($conn, "UPDATE bahan_baku SET stok = $kurangStok WHERE nama = '$nama' ");
+  }
+
+  $query = mysqli_query($conn, "UPDATE stok_masuk SET jumlah = '$jumlah' WHERE id = $id");
+  
+  return mysqli_affected_rows($conn);
+
+  return mysqli_affected_rows($conn);
+}
 
 // menghapus data stok masuk
 function hapus_stok_masuk($id) {
@@ -171,6 +196,37 @@ function tambah_stok_keluar($data) {
 }
 
 // mengubah data stok keluar
+function ubah_stok_keluar($data) {
+  global $conn;
+
+  $id = $data['id'];
+  $jumlah = htmlspecialchars($data['jumlah']);
+
+  $query2 = mysqli_query($conn, "SELECT bahan_baku.stok, bahan_baku.nama, stok_keluar.nama, stok_keluar.id = $id, stok_keluar.jumlah FROM bahan_baku INNER JOIN stok_keluar ON bahan_baku.nama = stok_keluar.nama WHERE stok_keluar.id = $id ");
+  $row2 = mysqli_fetch_array($query2);
+  
+  $jumlah2 = $row2['jumlah'];
+  $nama = $row2['nama'];
+  $stok = $row2['stok'];
+  
+  if ( $jumlah > $jumlah2 ) {
+    $selisih = $jumlah2 - $jumlah;
+    $tambahStok = $stok + $selisih;
+    
+    $query4 = mysqli_query($conn, "UPDATE bahan_baku SET stok = $tambahStok WHERE nama = '$nama' ");
+  } elseif ( $jumlah < $jumlah2 ) {
+    $selisih = $jumlah2 - $jumlah;
+    $kurangStok = $stok - $selisih;
+    
+    $query5 = mysqli_query($conn, "UPDATE bahan_baku SET stok = $kurangStok WHERE nama = '$nama' ");
+  }
+
+  $query = mysqli_query($conn, "UPDATE stok_keluar SET jumlah = '$jumlah' WHERE id = $id");
+  
+  return mysqli_affected_rows($conn);
+
+  return mysqli_affected_rows($conn);
+}
 
 // menghapus data stok keluar
 function hapus_stok_keluar($id) {

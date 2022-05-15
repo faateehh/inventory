@@ -1,5 +1,11 @@
 <?php 
-include 'functions.php'; 
+include 'functions.php';
+
+if(ISSET($_SESSION['login'])){
+
+} else {
+  header('location: login.php');
+}
 
 $query = mysqli_query($conn, "SELECT * FROM bahan_baku WHERE stok < 10");
 ?>
@@ -313,7 +319,7 @@ if ($_SESSION['role'] == 'admin') {
                   <td scope="row"><?= $row["jumlah"]; ?></td>
                   <td scope="row">
                       <a type="button" href="detail-stok-keluar.php?id=<?= $row["id"]; ?>" class="btn btn-warning">Detail</a>
-                      <a type="button" href="#ubah-stok-keluar.php?id=<?= $row["id"]; ?>" class="btn btn-primary" >Ubah</a>
+                      <a type="button" href="ubah-stok-keluar.php?id=<?= $row["id"]; ?>" class="btn btn-primary" >Ubah</a>
                       <a type="button" href="hapus-stok-keluar.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin?');" class="btn btn-danger">Hapus</a>
                   </td>
               </tr>

@@ -73,7 +73,7 @@ if ($_SESSION['role'] == 'admin') {
         </a>
         </li>
         <li>
-        <a href="bahan-baku.php" class="nav-link active">
+        <a href="bahan-baku.php" class="nav-link link-dark">
             <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg> -->
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 20H22V16H2V20ZM4 17H6V19H4V17ZM2 4V8H22V4H2ZM6 7H4V5H6V7ZM2 14H22V10H2V14ZM4 11H6V13H4V11Z" fill="black"/>
@@ -91,7 +91,7 @@ if ($_SESSION['role'] == 'admin') {
         </a>
         </li>
         <li>
-        <a href="stok-keluar.php" class="nav-link link-dark">
+        <a href="stok-keluar.php" class="nav-link active">
             <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg> -->
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 20H22V16H2V20ZM4 17H6V19H4V17ZM2 4V8H22V4H2ZM6 7H4V5H6V7ZM2 14H22V10H2V14ZM4 11H6V13H4V11Z" fill="black"/>
@@ -187,7 +187,7 @@ if ($_SESSION['role'] == 'admin') {
         </a>
         </li>
         <li>
-        <a href="bahan-baku.php" class="nav-link active">
+        <a href="bahan-baku.php" class="nav-link link-dark">
             <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg> -->
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 20H22V16H2V20ZM4 17H6V19H4V17ZM2 4V8H22V4H2ZM6 7H4V5H6V7ZM2 14H22V10H2V14ZM4 11H6V13H4V11Z" fill="black"/>
@@ -205,7 +205,7 @@ if ($_SESSION['role'] == 'admin') {
         </a>
         </li>
         <li>
-        <a href="stok-keluar.php" class="nav-link link-dark">
+        <a href="stok-keluar.php" class="nav-link active">
             <!-- <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg> -->
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M2 20H22V16H2V20ZM4 17H6V19H4V17ZM2 4V8H22V4H2ZM6 7H4V5H6V7ZM2 14H22V10H2V14ZM4 11H6V13H4V11Z" fill="black"/>
@@ -278,15 +278,15 @@ if ($_SESSION['role'] == 'admin') {
     
     $id = $_GET['id'];
 
-    $dataBahanBaku = mysqli_query($conn, "SELECT * FROM bahan_baku WHERE id = $id");
-    $row = mysqli_fetch_array($dataBahanBaku);
+    $dataStokKeluar = mysqli_query($conn, "SELECT * FROM stok_keluar WHERE id = $id");
+    $row = mysqli_fetch_array($dataStokKeluar);
 
     if(ISSET($_POST['ubah'])) {
-      if(ubah_bahan_baku($_POST) > 0 ) {
+      if(ubah_stok_keluar($_POST) > 0 ) {
           echo "
           <script>
               alert('data berhasil diubah!');
-              window.open('bahan-baku.php','_self')
+              window.open('stok-masuk.php','_self')
           </script>";
       }
         
@@ -299,7 +299,7 @@ if ($_SESSION['role'] == 'admin') {
     <div class="card shadow mb-4">
       <div class="card-header">
         <div class="col-3">
-          <a href="bahan-baku.php" type="button" class="btn btn-outline-primary rounded-pill"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+          <a href="stok-keluar.php" type="button" class="btn btn-outline-primary rounded-pill"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
         </div>
       </div>
 
@@ -308,16 +308,8 @@ if ($_SESSION['role'] == 'admin') {
         <form action="" method="post" class="py-3 px-3">
           <input type="hidden" name="id" value="<?= $row['id']; ?>">
         <div class="mb-3">
-          <label for="nama" class="form-label">Nama Bahan Baku</label>
-          <input type="text" class="form-control" id="nama" name="nama" value="<?= $row['nama']; ?>">
-        </div>
-        <div class="mb-3">
-          <label for="satuan" class="form-label">Satuan</label>
-          <input type="text" class="form-control" id="satuan" name="satuan" value="<?= $row['satuan']; ?>">
-        </div>
-        <div class="mb-3">
-          <label for="harga" class="form-label">Harga (Rp)</label>
-          <input type="number" class="form-control" id="harga" name="harga" value="<?= $row['harga']; ?>">
+          <label for="nama" class="form-label">Jumlah</label>
+          <input type="number" class="form-control" id="nama" name="nama" value="<?= $row['jumlah']; ?>">
         </div>
         <div class="mb-3">
           <button type="submit" class="btn btn-success" name="ubah">Ubah</button>

@@ -1,5 +1,11 @@
 <?php 
-include 'functions.php'; 
+include 'functions.php';
+
+if(ISSET($_SESSION['role'])){
+
+} else {
+  header('location: login.php');
+}
 
 $query = mysqli_query($conn, "SELECT * FROM bahan_baku WHERE stok < 10");
 ?>

@@ -1,7 +1,7 @@
 <?php 
 include 'functions.php';
 
-if(ISSET($_SESSION['login'])){
+if(ISSET($_SESSION['role'])){
 
 } else {
   header('location: login.php');

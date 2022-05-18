@@ -118,7 +118,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `nama_lengkap`, `nama_pengguna`, `password`, `email`, `role`) VALUES
 (1, 'Joko Widodo', 'Jokowi', '2289387438e5d6f55335b1bca94a512d', 'jokowidodo@email.com', 'admin'),
-(2, 'Ma\'ruf Amin', 'Amin', 'b25bd893d48f22c82f5e8e3f08ee1b42', 'maarufamin@email.com', 'staff'),
+(2, 'Maruf Amin', 'Amin', 'b25bd893d48f22c82f5e8e3f08ee1b42', 'maarufamin@email.com', 'staff'),
 (3, 'Prabowo Subianto', 'Prabowo', '18a9867698b213c9e602ed4a4b2b4a36', 'prabowosubianto@email.com', 'staff');
 
 --

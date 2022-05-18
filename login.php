@@ -7,7 +7,7 @@ if (isset($_SESSION['email'])) {
 
 if(ISSET($_POST['masuk'])) {
   $email = $_POST['email'];
-  $password = md5($_POST['password']);
+  $password = $_POST['password'];
 
   $query = mysqli_query($conn, "SELECT * FROM users WHERE email='$email' AND password='$password'");
 

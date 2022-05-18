@@ -50,7 +50,7 @@ function tambah_user($data) {
   $namaLengkap = htmlspecialchars($data['nama_lengkap']);
   $namaPengguna = htmlspecialchars($data['nama_pengguna']);
   $email = htmlspecialchars($data['email']);
-  $password = htmlspecialchars(md5($data['password']));
+  $password = htmlspecialchars($data['password']);
   $role = htmlspecialchars($data['role']);
 
   $query = "INSERT INTO users ( nama_lengkap, nama_pengguna, email, password, role ) VALUES ( '$namaLengkap', '$namaPengguna', '$email', '$password', '$role' )";
@@ -67,7 +67,7 @@ function ubah_user($data) {
   $namaLengkap = htmlspecialchars($data['nama_lengkap']);
   $namaPengguna = htmlspecialchars($data['nama_pengguna']);
   $email = htmlspecialchars($data['email']);
-  $password = htmlspecialchars(md5($data['password']));
+  $password = htmlspecialchars($data['password']);
   $role = htmlspecialchars($data['role']);
 
   $query = "UPDATE users SET nama_lengkap = '$namaLengkap', nama_pengguna = '$namaPengguna', email = $email, password = '$password', role = '$role' WHERE id = $id";
@@ -263,6 +263,17 @@ function tambah_laporan($data) {
 }
 
 // ubah data laporan
+function ubah_laporan($data) {
+  global $conn;
+
+  $id = $data['id'];
+  $satuan = htmlspecialchars($data['jumlah']);
+  $harga = htmlspecialchars($data['keterangan']);
+
+  $query = mysqli_query($conn, "UPDATE laporan SET jumlah = '$jumlah', keterangan = '$keterangan' WHERE id = $id");
+
+  return mysqli_affected_rows($conn);
+}
 
 // hapus data laporan
 function hapus_laporan($id) {

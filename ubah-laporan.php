@@ -275,6 +275,22 @@ if ($_SESSION['role'] == 'admin') {
     } else {
     echo 'gagal';
     }
+    
+    $id = $_GET['id'];
+
+    $dataLaporan = mysqli_query($conn, "SELECT * FROM laporan WHERE id = $id");
+    $row = mysqli_fetch_array($dataLaporan);
+
+    if(ISSET($_POST['ubah'])) {
+      if(ubah_bahan_baku($_POST) > 0 ) {
+          echo "
+          <script>
+              alert('data berhasil diubah!');
+              window.open('laporan.php','_self')
+          </script>";
+      }
+        
+    }
     ?>
       
     <!-- Content -->
@@ -282,48 +298,30 @@ if ($_SESSION['role'] == 'admin') {
         
     <div class="card shadow mb-4">
       <div class="card-header">
-          <div class="d-sm-flex align-items-center justify-content-between">
-              <h4 class="m-0 font-weight-bold">Data Laporan</h4>
-              <a href="tambah-laporan.php" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm">
-                  Tambah
-              </a>
-          </div>
+        <div class="col-3">
+          <a href="laporan.php" type="button" class="btn btn-outline-primary rounded-pill"><i class="fa-solid fa-arrow-left"></i> Kembali</a>
+        </div>
       </div>
 
       <div class="card-body">
         <div class="table-responsive">
-          <table class="table table-bordered display" id="example" width="100%" cellspacing="0">
-          <thead>
-              <tr>
-                  <th scope="col">No.</th>
-                  <th scope="col">ID Stok Keluar</th>
-                  <th scope="col">Nama Bahan Baku</th>
-                  <th scope="col">Jumlah</th>
-                  <th scope="col">Keterangan</th>
-                  <th scope="col">Aksi</th>
-              </tr>
-          </thead>
-          <tbody>
-              <?php 
-              $dataLaporan = mysqli_query($conn, "SELECT stok_keluar.id as `id_stok_keluar`, stok_keluar.nama, laporan.id, laporan.jumlah, laporan.keterangan FROM laporan JOIN stok_keluar ON laporan.id_stok_keluar = stok_keluar.id");
-              
-              $i = 1;
-              foreach( $dataLaporan as $row ) :
-              ?>
-              <tr>
-                  <td scope="row"><?= $i++; ?></td>
-                  <td scope="row"><?= $row["id_stok_keluar"]; ?></td>
-                  <td scope="row"><?= $row["nama"]; ?></td>
-                  <td scope="row"><?= $row["jumlah"]; ?></td>
-                  <td scope="row"><?= $row["keterangan"]; ?></td>
-                  <td scope="row">
-                      <a type="button" href="ubah-laporan.php?id=<?= $row["id"]; ?>" class="btn btn-primary" >Ubah</a>
-                      <a type="button" href="hapus-laporan.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin?');" class="btn btn-danger">Hapus</a>
-                  </td>
-              </tr>
-              <?php endforeach; ?>
-          </tbody>
-          </table>
+        
+        <form action="" method="post" class="py-3 px-3">
+          <div class="mb-3">
+            <label for="jumlah" class="form-label">Jumlah</label>
+            <input type="number" class="form-control" id="jumlah" name="jumlah" value="<?= $row['jumlah']; ?>" required>
+          </div>
+          <div class="mb-3">
+            <label for="keterangan" class="form-label">Keterangan</label>
+            <input type="text" class="form-control" id="keterangan" name="keterangan" value="<?= $row['keterangan']; ?>" required>
+          </div>
+          
+          <div class="mb-3">
+            <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
+          </div>
+
+        </form>
+
         </div>
       </div>
 

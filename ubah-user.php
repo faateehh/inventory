@@ -282,7 +282,7 @@ if ($_SESSION['role'] == 'admin') {
     $row = mysqli_fetch_array($dataUsers);
 
     if(ISSET($_POST['ubah'])) {
-      if(ubah_bahan_baku($_POST) > 0 ) {
+      if(ubah_user($_POST) > 0 ) {
           echo "
           <script>
               alert('data berhasil diubah!');
@@ -328,7 +328,7 @@ if ($_SESSION['role'] == 'admin') {
             <input type="text" class="form-control" id="role" name="role" value="<?= $row['role']; ?>">
           </div>
           <div class="mb-3">
-            <button type="submit" class="btn btn-success" name="tambah">Tambah</button>
+            <button type="submit" class="btn btn-success" name="ubah">Ubah</button>
           </div>
 
         </form>
